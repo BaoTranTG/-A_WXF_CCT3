@@ -1,0 +1,160 @@
+﻿@using DoAnWebFilm.Models;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phim Hay||FilmRB</title>
+    <link rel="stylesheet" href="~/Style/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/Style/fontawesome-free-5.15.4-web/css/all.css">
+    <link rel="stylesheet" href="~/Style/PagedList.css">
+    <script src="~/Scripts/js/bootstrap.js"></script>
+</head>
+
+<style>
+    body {
+        background-image: url('../../image/background (2).jpg');
+    }
+    .list {
+        padding-left: 0px;
+    }
+    .list li {
+            list-style-type: none;
+    }
+    .list a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.5);
+    }
+    .list :hover {
+            color: white;
+    }
+</style>
+<body>
+    <div class="header bg-dark">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    @Html.ActionLink("FILMRB", "Index", "Home", new { area = "" }, new { @class = "fas fa-film fs-2 text-warning navbar-brand fs-3 text-warning" })
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#"><strong>Phim Lẻ</strong></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <strong>Thể loại</strong>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>@Html.Action("filmType", "Home")</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <strong>Năm Phát Hành</strong>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>@Html.Action("filmYear", "Home")</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <strong>Quốc Gia</strong>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>@Html.Action("nation", "Home")</li>
+                                </ul>
+                            </li>
+                            <li>
+                                @using (Html.BeginForm("searchFilm", "Search", FormMethod.Get, new { @class = "d-flex" }))
+                                {
+                                    @Html.TextBox("searchFilm", "", new { @class = "form-control", @placeholder = "Tìm: tên phim" })
+                                    <button class="btn btn-danger d-inline-flex" type="submit"><i class="fab fa-searchengin"></i></button>}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="me-5">
+                        <p class="text-end text-light">                            
+                            @{ String ten;
+                                if (Session["Taikhoan"] == null)
+                                {
+                                    ten = "";
+                                    <a href="/ThanhVien/login" class="navbar-toggler bg-dark d-none d-lg-block "> <i class="fas fa-users text-primary"> Đăng Nhập</i></a>                                                         
+                                }
+                                else
+                                {
+                                    THANHVIEN tv = (THANHVIEN)Session["Taikhoan"];
+                                    ten = tv.HOTEN;
+                                    <p class="text-warning">Xin chào: <i class="fas fa-user"></i> [@ten] <a href="~/ThanhVien/logout"><i class="fas fa-sign-out-alt"></i>Logout</a></p>
+                                    
+                                } 
+                             }                           
+                        </p>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    @RenderBody()
+    <section class="py-4 bg-dark text-white-50">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4 gy-lg-0">
+                <div class="col">
+                    <h6 class="mb-3 mb-md-4 fw-bold text-info">Thông tin về FILMRB</h6>
+                    <p class="text-warning">
+                        Xem phim mới miễn phí nhanh chất lượng cao. Xem Phim online Việt Sub, Thuyết minh, lồng tiếng chất lượng
+                        HD. Xem phim nhanh online chất lượng cao
+                    </p>
+
+                    <ul class="list-inline mt-5">
+                        <li class="list-inline-item">
+                            <a href="#" class="p-2 rounded bg-black link-light"><i class="fab fa-fw fa-facebook-square"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="p-2 rounded bg-black link-light"><i class="fab fa-fw fa-google-plus-g"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="p-2 rounded bg-black link-light"><i class="fab fa-fw fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h6 class="mb-3 mb-md-4 fw-bold text-info">Thể Loại</h6>
+                    <ul class="list">
+                        <li><a href="#" class="text-warning">Phim Hành Động</a></li>
+                        <li><a href="#" class="text-warning">Phim Tình Cảm</a></li>
+                        <li><a href="#" class="text-warning">Phim Kiếm Hiệp</a></li>
+                        <li><a href="#" class="text-warning">Phim Hài Hước</a></li>
+                        <li><a href="#" class="text-warning">Phim Hoạt Hình</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h6 class="mb-3 mb-md-4 fw-bold text-info">Phim Mới</h6>
+                    <ul class="list">
+                        <li><a href="#" class="text-warning">Phim Sắp Chiếu</a></li>
+                        <li><a href="#" class="text-warning">Phim Hot Nhất Tuần</a></li>
+                        <li><a href="#" class="text-warning">Phim Thuyết Minh</a></li>
+
+                    </ul>
+                </div>
+                <div class="col">
+                    <h6 class="mb-3 mb-md-4 fw-bold text-info">Liên Hệ</h6>
+                    <p class="text-warning">
+                        <i class="fas fa-phone text-warning"></i>
+                        0355025599
+                    </p>
+                    <p class="text-warning">
+                        <i class="fas fa-mail-bulk text-warning"></i>
+                        FilmRB@gmail.com
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>
+
+

@@ -1,0 +1,101 @@
+﻿@using DoAnWebFilm.Models;
+
+@{ ViewBag.Title = "watchFilm";
+Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<!--Film-->
+<section>
+    <div class="container-md">
+        <div class=" p-3 my-2" style="background-color: #8fd7e9;">
+            <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item "><a href="#" class="text-danger">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#" class="text-danger"> Phim </a></li>
+                    <li class="breadcrumb-item active text-dark" aria-current="page">@Model.TEN_PHIM</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row gx-2">
+            <div class="col-12 col-lg-9">
+                <div class="">
+                    <div class="row gx-1 border-bottom">
+                        <div class="p-3 my-2" style="background-color: #8fd7e9;">
+                            <div>
+                                <h4 class="text-dark">Bạn Đang Xem Phim: @Model.TEN_PHIM</h4>
+                            </div>
+                        </div>
+                        <div class=" ratio ratio-16x9">
+                            <iframe src="@Model.LINK_PHIM" title="YouTube video player"
+                                    frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class=" my-2 p-3 py-4 text-dark" style="background-color: #8fd7e9;">
+                            <h3>Đánh Giá</h3>
+                            <span class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star text-white"></i>
+                            </span>
+                            <span>(35 lượt)</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="mb-3 mt-1 p-3 text-white shadow-sm" style="background-color: #8fd7e9;">
+                        <div class="border-bottom">
+                        <h5 class="pb-2 mb-0 text-dark">Bình Luận</h5></div>
+                        <div>
+                            @Html.Action("binhLuan", "Home", new { id = @Model.ID_PHIM })
+                        </div>
+                        <div>
+                           @{
+                                string ten;
+                                int id_tv;
+                                if (Session["TaiKhoan"] == null)
+                                {
+                                    ten = " ";
+                                }
+                                else
+                                {
+                                    THANHVIEN tv = (THANHVIEN)Session["Taikhoan"];
+                                    ten = tv.HOTEN;
+                                    id_tv = tv.ID_TV;
+
+                                    @ten
+
+                                    Html.RenderPartial("createBinhLuan", new DoAnWebFilm.Models.BINHLUAN()
+                                    {
+                                        ID_PHIM = @Model.ID_PHIM,
+                                        ID_TV = id_tv
+                                    });
+                                }
+                            }
+                        </div> 
+                    </div>
+                </div> 
+            </div>
+            <div class="col-12 col-lg-3 d-none d-lg-block ">
+                <div class=" p-1">
+                    <i class="fas fa-video fa-2x text-light"> <h4 class="d-inline text-light">PHIM SẮP CHIẾU</h4></i>
+                    <hr class="text-light"/>
+                    <div class="bg-light p-2 rounded">
+                        @Html.Action("phimSapChieu", "PhimSapChieu")
+                    </div>
+                </div>
+                <div class=" p-1">
+                    <i class="fas fa-video fa-2x text-light"> <h4 class="d-inline text-light">PHIM HOT</h4></i>
+                    <hr class="text-light"/>
+                    <div class="bg-light p-2 rounded">
+                        @Html.Action("phimHot", "Home")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

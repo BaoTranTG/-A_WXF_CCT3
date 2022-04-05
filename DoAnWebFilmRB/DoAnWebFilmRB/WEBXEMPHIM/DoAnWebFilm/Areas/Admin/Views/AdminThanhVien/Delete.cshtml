@@ -1,0 +1,55 @@
+﻿@model DoAnWebFilm.Models.THANHVIEN
+
+@{ ViewBag.Title = "Delete";
+Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<div>
+    <dl class="dl-horizontal m-4">
+        <h2 class="text-danger">Xóa Quốc Gia</h2>
+        <h5>Bạn có chắc chắn muốn xóa không?</h5>
+        <hr />
+        </br>
+        <dd>
+            <h5>ID THÀNH VIÊN: </h5>
+            @Html.DisplayFor(model => model.ID_TV)
+        </dd>
+        <dd>
+            <h5>HỌ VÀ TÊN: </h5>
+            @Html.DisplayFor(model => model.HOTEN)
+        </dd>
+        <dd>
+            <h5>TÀI KHOẢN: </h5>
+            @Html.DisplayFor(model => model.TAIKHOAN)
+        </dd>
+        <dd>
+            <h5>MẬT KHẨU: </h5>
+            @Html.DisplayFor(model => model.MATKHAU)
+        </dd>
+        <dd>
+            <h5>EMAIL: </h5>
+            @Html.DisplayFor(model => model.EMAIL)
+        </dd>
+        <dd>
+            <h5>NGÀY SINH: </h5>
+            @Html.DisplayFor(model => model.NGAYSINH)
+        </dd>
+        <dd>
+            <h5>ĐỊA CHỈ: </h5>
+            @Html.DisplayFor(model => model.DIACHI)
+        </dd>
+        <dd>
+            <h5>SỐ ĐIỆN THOẠI: </h5>
+            @Html.DisplayFor(model => model.SDT)
+        </dd>
+        </br>
+        @using (Html.BeginForm())
+        {
+    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-warning" /> |
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+}
+    </dl>
+</div>

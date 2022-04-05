@@ -1,0 +1,64 @@
+﻿@using DoAnWebFilm.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<DoAnWebFilm.Models.BINHLUAN>
+
+@{ ViewBag.Title = "Index";
+Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<h2 class="text-secondary text-center p-2">BÌNH LUẬN</h2>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: auto;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+    th {
+        background-color: #0cafb4;
+        color: white;
+    }
+</style>
+<div class="my-2 d-flex justify-content-end ">
+    <div class="">
+        @using (Html.BeginForm("Search", "AdminBinhLuan", FormMethod.Get, new { @class = "d-flex" }))
+        {
+            @Html.TextBox("search", "", new { @class = "form-control", @placeholder = "Tìm kiếm bình luận" })
+            <input type="submit" class="btn btn-primary" value="Tìm kiếm" />
+         }
+    </div>
+</div>
+<table>
+    <tr>
+        <th>ID  Bình Luận</th>
+        <th>Tên Thành Viên</th>
+        <th>Tên Phim</th>
+        <th>Nội Dung</th>
+        <th>Ngày Bình Luận</th>
+        <th colspan="2">
+            <h>Tác Vụ</h>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID_BINHLUAN</td>
+            <td>@item.THANHVIEN.HOTEN</td>
+            <td>@item.PHIM.TEN_PHIM</td>
+            <td>@item.NOIDUNG</td>
+            <td>@item.NGAY_BINHLUAN</td>
+            <td>
+                <a href="@Url.Action("Delete","AdminBinhLuan",new { id= @item.ID_BINHLUAN})"><i class="fas fa-trash-alt text-danger fa-2x"></i></a>
+            </td>
+        </tr>
+
+    }
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))

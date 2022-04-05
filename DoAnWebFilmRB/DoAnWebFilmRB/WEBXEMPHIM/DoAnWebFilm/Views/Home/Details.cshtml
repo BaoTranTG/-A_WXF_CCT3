@@ -1,0 +1,113 @@
+﻿@model DoAnWebFilm.Models.PHIM
+
+@{ ViewBag.Title = "Details";
+   Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<section>
+    <div class="container-md ">
+        <div class=" p-3 my-2" style="background-color: #8fd7e9;">
+            <nav class="" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item "><a href="#" class="text-danger">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#" class="text-danger"> Phim </a></li>
+                    <li class="breadcrumb-item active text-dark" aria-current="page">@Html.DisplayFor(model => model.TEN_PHIM)</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="row gx-2">
+            <div class="col-12 col-lg-9">
+                <div class=" ">
+                    <div class="row gx-1">
+                        <div class="col-sm-12 col-md-5 ">
+                            <div class="card border-0  ">
+                                <img src="@Url.Content("~/PosterFilm/"+ @Html.DisplayFor(model => model.IMAGE_PHIM))" class="card-img-top" alt="...">
+                                <div class="card-header d-flex justify-content-center " style="background-color: #8fd7e9;">
+
+                                    <a href="@Url.Action("LuotXem","Home", new { id= Model.ID_PHIM} )" style="text-decoration:none">
+                                        <button type="button" class="btn btn-warning mx-1 ">Xem Phim</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="text-dark p-3 py-4" style="background-color: #8fd7e9;">
+                                <div class="border-bottom">
+                                    <h3>      @Html.DisplayFor(model => model.TEN_PHIM)</h3>
+                                </div>
+                                <div class="mt-3">
+                                    <p>Trạng Thái: @Html.DisplayFor(model => model.TRANGTHAI.TEN_TRANGTHAI)</p>
+                                    <p>Quốc Gia:  @Html.DisplayFor(model => model.QUOCGIA.TEN_QG)</p>
+                                    <p>Năm Sản Xuất:   @Html.DisplayFor(model => model.NAMPHATHANH.NAM_PHAT)</p>
+                                    <p>
+                                        Thể Loại:
+                                        @foreach (var filmType in Model.CHITIETLOAIs)
+                                        {
+                                            <span>@filmType.LOAI.TENLOAI,  </span>
+                                        }
+                                    </p>
+                                    <p>
+                                        Diễn Viên:
+                                        @foreach (var filmType in Model.PHIM_DVs)
+                                        {
+                                            <span>@filmType.DIENVIEN.TEN_DV,  </span>
+                                        }
+                                    </p>
+                                    <p>Chất lượng: Full HD</p>
+                                    <p>Phụ Đề: Tiếng Việt</p>
+                                    <p>Lượt Xem: @Html.DisplayFor(model => model.LuotXem) </p>
+                                </div>
+                            </div>
+                            <div class="my-2 p-3 py-5 text-dark" style="background-color: #8fd7e9;">
+                                <h3>Đánh Giá</h3>
+                                <span class="text-warning">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star text-white"></i>
+                                </span>
+
+                                <span>(35 lượt)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" text-dark p-3 my-2" style="background-color: #8fd7e9;">
+                    <div class="border-bottom">
+                        <h3>Nội dung</h3>
+                    </div>
+                    <div>
+                        <p>
+                            @Html.DisplayFor(model => model.MOTA)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-3 d-none d-lg-block ">
+                <div class=" p-1">
+                    <i class="fas fa-video fa-2x text-light"> <h4 class="d-inline text-light">PHIM SẮP CHIẾU</h4></i>
+                    <hr class="text-light"/>
+                    <div class="bg-light p-2 rounded">
+                        @Html.Action("phimSapChieu", "PhimSapChieu")
+                    </div>
+                </div>
+
+                <div class=" p-1">
+                    <i class="fas fa-video fa-2x text-light"> <h4 class="d-inline text-light">PHIM HOT</h4></i>
+                    <hr class="text-light"/>
+                    <div class="bg-light p-2 rounded">
+                        @Html.Action("phimHot", "Home")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

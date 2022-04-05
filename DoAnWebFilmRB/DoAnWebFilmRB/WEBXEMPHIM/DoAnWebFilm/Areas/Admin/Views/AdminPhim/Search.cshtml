@@ -1,0 +1,90 @@
+﻿
+@using DoAnWebFilm.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<DoAnWebFilm.Models.PHIM>
+@{ ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; 
+}
+<h2 class="text-secondary text-center p-2">PHIMRB</h2>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: auto;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #0cafb4;
+        color: white;
+    }
+</style>
+<div class="my-2 d-flex justify-content-end ">
+    <div class="">
+        @using (Html.BeginForm("Search", "AdminPhim", FormMethod.Get, new { @class = "d-flex" }))
+        {
+            @Html.TextBox("search", "", new { @class = "form-control", @placeholder = "Tìm kiếm" })
+            <input type="submit" class="btn btn-primary" value="Tìm kiếm" />
+         }
+    </div>
+</div>
+<table>
+    <tr>
+        <th>ID PHIM</th>
+        <th>TÊN PHIM</th>
+        <th>IMAGE PHIM</th>
+        <th>LOẠI</th>
+        <th>DIỄN VIÊN</th>
+        <th>NĂM PHÁT HÀNH</th>
+        <th>QUỐC GIA</th>
+        <th>TRẠNG THÁI</th>
+        <th colspan="2">
+            <a href="@Url.Action("Create","AdminPhim")"><i class="fas fa-plus-circle text-warning fa-2x"></i></a>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID_PHIM</td>
+            <td>@item.TEN_PHIM</td>
+            <td>
+                <img class="img-thumbnail" src="@Url.Content("~/PosterFilm/" + item.IMAGE_PHIM)" width="100" alt="Loading..." />
+            </td>
+            <td> 
+                @foreach (var phim in item.CHITIETLOAIs)
+                {
+                    <p style="margin-right: 10px;  ">@phim.LOAI.TENLOAI</p>
+                }
+             </td>
+            <td> 
+                @foreach (var phim in item.PHIM_DVs)
+                {
+                    <p style="margin-right: 10px;  ">@phim.DIENVIEN.TEN_DV</p>
+                }
+             </td> 
+            <td>@item.NAMPHATHANH.NAM_PHAT</td>
+            <td>@item.QUOCGIA.TEN_QG</td>
+            <td>@item.TRANGTHAI.TEN_TRANGTHAI</td>
+            <td>
+                <a href="@Url.Action("Edit","AdminPhim",new { id= @item.ID_PHIM})"><i class="fas fa-edit text-success fa-2x"></i></a>
+            </td>
+            <td>
+                <a href="@Url.Action("Delete","AdminPhim",new { id= @item.ID_PHIM})"><i class="fas fa-trash-alt text-danger fa-2x"></i></a>
+            </td>
+
+        </tr>  
+     }
+    <div class="text-center">
+        
+    </div>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+

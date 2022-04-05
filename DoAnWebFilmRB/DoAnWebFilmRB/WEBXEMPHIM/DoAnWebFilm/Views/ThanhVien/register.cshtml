@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<br />
+<div class="container ">
+    <div class="card w-75">
+        <div class="card-header bg-info">
+            <div class="text-center">
+                <h1>Đăng Ký</h1>
+            </div>
+        </div>
+        <h4 style="color:red;text-align:center">@ViewBag.Thongbao</h4>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">HỌ TÊN THÀNH VIÊN</label>
+                        @Html.TextBox("HotenTV", "", new { @class = "form-control", @minlength = 0, @maxlength = 50, @placeholder = "Họ tên" })
+                        <p style="color:red">@ViewData["Loi1"]</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">TÀI KHOẢN</label>
+                        @Html.TextBox("TenDN", "", new { @class = "form-control", @minlength = 0, @maxlength = 50, @placeholder = "Tên đăng nhập" })
+                        <p style="color:red">@ViewData["Loi2"]</p>
+                        <p style="color:red">@ViewData["Loi10"]</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">MẬT KHẨU</label>
+                        @Html.Password("Matkhau", "", new { @class = "form-control", @minlength = 0, @maxlength = 50, @placeholder = "Mật khẩu" })
+                        <p style="color:red">@ViewData["Loi3"]</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">NHẬP LẠI MẬT KHẨU</label>
+                        @Html.Password("Nhaplaimatkhau", "", new { @class = "form-control", @minlength = 0, @maxlength = 50, @placeholder = "Nhập lại mật khẩu" })
+                        <p style="color:red">@ViewData["Loi4"]</p>
+                        <p style="color:red">@ViewData["Loi9"]</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">EMAIL</label>
+                        @Html.TextBox("Email", "", new { @class = "form-control", @minlength = 0, @maxlength = 100, @placeholder = "Email" })
+                        <p style="color:red">@ViewData["Loi5"]</p>
+                        <p style="color:red">@ViewData["Loi11"]</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">NGÀY SINH</label>
+                        @Html.TextBox("Ngaysinh", "", new { @class = "form-control", @placeholder = "Ngày sinh" })
+                        <p style="color:red">@ViewData["Loi8"]</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">ĐỊA CHỈ</label>
+                        @Html.TextBox("Diachi", "", new { @class = "form-control", @minlength = 0, @maxlength = 100, @placeholder = "Địa chỉ" })
+                        <p style="color:red">@ViewData["Loi6"]</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">SỐ ĐIỆN THOẠI</label>
+                        @Html.TextBox("Dienthoai", "", new { @class = "form-control", @minlength = 0, @maxlength = 15, @placeholder = "Số điện thoại" })
+                        <p style="color:red">@ViewData["Loi7"]</p>
+                    </div>
+                </form>
+                <input class="btn btn-primary " type="submit" value="Đăng Ký" />
+                <a  class="account">
+                    Bạn đã có tài khoản?
+                </a>
+                @Html.ActionLink("Đăng nhập", "login", "ThanhVien", null, new { @class = "account" })
+            </div>
+        }
+    </div>  
+</div>
+<br />
+<br />
+<br />
+

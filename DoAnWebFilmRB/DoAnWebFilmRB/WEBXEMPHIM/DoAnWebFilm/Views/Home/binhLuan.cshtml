@@ -1,0 +1,15 @@
+﻿@model IEnumerable<DoAnWebFilm.Models.BINHLUAN>
+
+@foreach (var cmt in Model)
+{
+    <div class="d-flex text-muted pt-2">
+        <i class="fas fa-user text-danger"></i>
+
+        <p class="pb-2 mb-1 small lh-sm text-dark">
+            <strong class="d-block text-dark">@cmt.THANHVIEN.HOTEN</strong>
+                @cmt.NOIDUNG
+            
+        </p>
+    </div>
+
+}

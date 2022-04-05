@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DoAnWebFilm.Models.LOAI>
+
+@{ ViewBag.Title = "Index";
+Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<h2 class="text-secondary text-center p-2">LOẠI</h2>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: auto;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #0cafb4;
+        color: white;
+    }
+</style>
+<table>
+    <tr>
+        <th>ID Loại</th>
+        <th>Tên Loại</th>
+        <th colspan="2">
+            <a href="@Url.Action("Create","AdminLoai")"><i class="fas fa-plus-circle text-warning fa-2x"></i></a>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>@item.IDLOAI</td>
+            <td>@item.TENLOAI</td>
+            <td>
+                <a href="@Url.Action("Edit","AdminLoai",new { id= @item.IDLOAI})"><i class="fas fa-edit text-success fa-2x"></i></a>
+            </td>
+            <td>
+                <a href="@Url.Action("Delete","AdminLoai",new { id= @item.IDLOAI})"><i class="fas fa-trash-alt text-danger fa-2x"></i></a>
+            </td>
+        </tr>
+
+    }
+</table>

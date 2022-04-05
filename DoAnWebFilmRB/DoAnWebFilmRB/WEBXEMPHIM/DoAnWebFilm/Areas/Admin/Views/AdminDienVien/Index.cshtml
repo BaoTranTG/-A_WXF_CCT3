@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DoAnWebFilm.Models.DIENVIEN>
+
+@{ ViewBag.Title = "Index";
+Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<h2 class="text-secondary text-center p-2">LOẠI</h2>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: auto;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #0cafb4;
+        color: white;
+    }
+</style>
+<table>
+    <tr>
+        <th>ID Diễn Viên</th>
+        <th>Tên Diễn Viên</th>
+        <th colspan="2">
+            <a href="@Url.Action("Create","AdminDienVien")"><i class="fas fa-plus-circle text-warning fa-2x"></i></a>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>@item.ID_DV</td>
+            <td>@item.TEN_DV</td>
+            <td>
+                <a href="@Url.Action("Edit","AdminDienVien",new { id= @item.ID_DV})"><i class="fas fa-edit text-success fa-2x"></i></a>
+            </td>
+            <td>
+                <a href="@Url.Action("Delete","AdminDienVien",new { id= @item.ID_DV})"><i class="fas fa-trash-alt text-danger fa-2x"></i></a>
+            </td>
+        </tr>
+
+    }
+</table>

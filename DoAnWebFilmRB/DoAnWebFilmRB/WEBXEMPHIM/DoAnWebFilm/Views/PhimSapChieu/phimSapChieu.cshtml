@@ -1,0 +1,39 @@
+﻿
+@model IEnumerable<DoAnWebFilm.Models.PHIMSAPCHIEU>
+@{
+    var index = 0;
+}
+@foreach (var phimsp in Model)
+{
+        index++;
+        <div class="card border-dark mb-1" style="background-color: #8fd7e9;">
+            <div class="row g-0">
+                <div class="col-3 ">
+                    <img src="@Url.Content("~/PosterFilmSC/"+  phimsp.IMAGE_PHIMSP)" class="img-fluid rounded-start h-100" alt="...">
+                </div>
+                <div class="col-9">
+                    <div class="card-header fw-bold text-dark px-2 py-0">
+                        <small>@phimsp.TEN_PHIMSP</small> <span class="text-dark float-end "><small class="bg-warning px-1">Trailer HD</small></span>
+                    </div>
+                    <br />
+                    <div class="card-body px-2 py-0">
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal@(index)">
+                            Trailer
+                        </button>
+                        <div class="modal fade" id="exampleModal@(index)" tabindex="-5"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl modal-dialog-centered">
+                                <div class="modal-content ratio ratio-16x9">
+
+                                    <iframe src="@phimsp.LINK_PHIMSP"
+                                            title="YouTube video player" frameborder="0"
+                                            allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+}

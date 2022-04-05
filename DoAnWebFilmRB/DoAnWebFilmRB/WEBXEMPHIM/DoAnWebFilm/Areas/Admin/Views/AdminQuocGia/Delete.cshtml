@@ -1,0 +1,30 @@
+﻿@model DoAnWebFilm.Models.QUOCGIA
+
+@{ ViewBag.Title = "Delete";
+Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<div>
+    <dl class="dl-horizontal m-4">
+        <h2 class="text-danger">Xóa Quốc Gia</h2>
+        <h5>Bạn có chắc chắn muốn xóa không?</h5>
+            <hr/>
+        </br>
+        <dd>
+            <h5>ID QUỐC GIA: </h5>
+            @Html.DisplayFor(model => model.ID_QG)
+        </dd>
+        <dd>
+            <h5>TÊN QUỐC GIA: </h5>
+            @Html.DisplayFor(model => model.TEN_QG)
+        </dd>
+        </br>
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-warning" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </dl>
+</div>

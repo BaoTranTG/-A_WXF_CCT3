@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DoAnWebFilm.Models.THANHVIEN>
+
+@{ ViewBag.Title = "Index";
+Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<h2 class="text-secondary text-center p-2">THÀNH VIÊN</h2>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: auto;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #0cafb4;
+        color: white;
+    }
+</style>
+<table>
+    <tr>
+        <th>ID TV</th>
+        <th>HỌ TÊN</th>
+        <th>TÀI KHOẢN</th>
+        <th>MẬT KHẨU</th>
+        <th>EMAIL</th>
+        <th>NGÀY SINH</th>
+        <th>ĐỊA CHỈ</th>
+        <th>SỐ ĐIỆN THOẠI</th>
+        <th colspan="2">
+            <h>Tác Vụ</h>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>@item.ID_TV</td>
+            <td>@item.HOTEN</td>
+            <td>@item.TAIKHOAN</td>
+            <td>@item.MATKHAU</td>
+            <td>@item.EMAIL</td>
+            <td>@item.NGAYSINH</td>
+            <td>@item.DIACHI</td>
+            <td>@item.SDT</td>
+            <td>
+                <a href="@Url.Action("Edit","AdminThanhVien",new { id= @item.ID_TV})"><i class="fas fa-edit text-success fa-2x"></i></a>
+            </td>
+            <td>
+                <a href="@Url.Action("Delete","AdminThanhVien",new { id= @item.ID_TV})"><i class="fas fa-trash-alt text-danger fa-2x"></i></a>
+            </td>
+        </tr>
+    }
+</table>

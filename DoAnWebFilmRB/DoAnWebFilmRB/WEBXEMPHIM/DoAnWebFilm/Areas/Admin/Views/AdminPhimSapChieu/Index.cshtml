@@ -1,0 +1,69 @@
+﻿
+@using DoAnWebFilm.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<DoAnWebFilm.Models.PHIMSAPCHIEU>
+
+@{ ViewBag.Title = "Index";
+Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<h2 class="text-secondary text-center p-2">PHIM SẮP CHIẾU</h2>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: auto;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+    th {
+        background-color: #0cafb4;
+        color: white;
+    }
+</style>
+<div class="my-2 d-flex justify-content-end ">
+    <div class="">
+        @using (Html.BeginForm("Search", "AdminPhimSapChieu", FormMethod.Get, new { @class = "d-flex" }))
+        {
+            @Html.TextBox("search", "", new { @class = "form-control", @placeholder = "Tìm kiếm phim" })
+            <input type="submit" class="btn btn-primary" value="Tìm kiếm" />
+         }
+    </div>
+</div>
+<table>
+    <tr>
+        <th>ID PHIMSC</th>
+        <th>TÊN PHIMSC</th>
+        <th>HÌNH PHIM</th>
+        <th>LINK PHIM</th>
+        <th colspan="2">
+            <a href="@Url.Action("Create","AdminPhimSapChieu")"><i class="fas fa-plus-circle text-warning fa-2x"></i></a>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID_PHIMSP</td>
+            <td>@item.TEN_PHIMSP</td>
+            <td>
+                <img class="img-thumbnail" src="@Url.Content("~/PosterFilmSC/" + item.IMAGE_PHIMSP)" width="100" alt="Loading..." />
+            </td>
+                
+            <td>@item.LINK_PHIMSP</td>
+            <td>
+                <a href="@Url.Action("Edit","AdminPhimSapChieu",new { id= @item.ID_PHIMSP})"><i class="fas fa-edit text-success fa-2x"></i></a>
+            </td>
+            <td>
+                <a href="@Url.Action("Delete","AdminPhimSapChieu",new { id= @item.ID_PHIMSP})"><i class="fas fa-trash-alt text-danger fa-2x"></i></a>
+            </td>
+        </tr>
+
+    }
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))

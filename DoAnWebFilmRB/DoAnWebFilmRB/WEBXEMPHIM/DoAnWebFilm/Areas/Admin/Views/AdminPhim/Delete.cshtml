@@ -1,0 +1,51 @@
+﻿@model DoAnWebFilm.Models.PHIM
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <dl class="dl-horizontal m-4">
+        <h2 class="text-danger">Xóa Phim </h2>
+        <h5>Bạn có chắc chắn muốn xóa không?</h5>
+        <hr />
+        </br>
+        <dd>
+            <h5>TÊN PHIM: </h5>
+            @Html.DisplayFor(model => model.TEN_PHIM)
+        </dd>
+        <dd>
+            <h5>HÌNH PHIM: </h5>
+            @Html.DisplayFor(model => model.IMAGE_PHIM)
+        </dd>
+        <dd>
+            <h5>LINK PHIM: </h5>
+            @Html.DisplayFor(model => model.LINK_PHIM)
+        </dd>
+        <dd>
+            <h5>MÔ TẢ: </h5>
+            @Html.DisplayFor(model => model.MOTA)
+        </dd>
+        <dd>
+            <h5>TRẠNG THÁI: </h5>
+            @Html.DisplayFor(model => model.ID_TRANGTHAI)
+        </dd>
+        <dd>
+            <h5>QUỐC GIA: </h5>
+            @Html.DisplayFor(model => model.ID_QG)
+        </dd>
+        <dd>
+            <h5>NĂM PHÁT HÀNH: </h5>
+            @Html.DisplayFor(model => model.ID_NAM)
+        </dd>
+        </br>
+        @using (Html.BeginForm())
+        {
+              @Html.AntiForgeryToken()
+              <div class="form-actions no-color">
+                  <input type="submit" value="Delete" class="btn btn-warning" /> |
+                   @Html.ActionLink("Back to List", "Index")
+              </div>
+         }
+    </dl>
+</div>

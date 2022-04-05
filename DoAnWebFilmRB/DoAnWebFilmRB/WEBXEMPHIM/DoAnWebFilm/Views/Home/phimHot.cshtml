@@ -1,0 +1,28 @@
+﻿
+@model IEnumerable<DoAnWebFilm.Models.PHIM>
+
+@foreach (var phimhot in Model)
+{
+<a href="@Url.Action("Details","Home", new { id= phimhot.ID_PHIM} )" style="text-decoration:none">
+    <div class="card border-dark mb-1" style="background-color: #8fd7e9;">
+        <div class="row g-0">
+            <div class="col-3 ">
+                <img src="@Url.Content("~/PosterFilm/"+  phimhot.IMAGE_PHIM)" class="img-fluid rounded-start h-100" alt="...">
+            </div>
+            <div class="col-9">
+                <div class="card-header fw-bold text-dark px-2 py-0">
+                    <small>@phimhot.TEN_PHIM</small> <span class="text-dark float-end "><small class="bg-warning px-1">Full HD</small></span>
+                </div>
+                <div class="card-body px-2 py-0">
+                    <div class="text-warning">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>}

@@ -1,0 +1,8 @@
+﻿@model IEnumerable<DoAnWebFilm.Models.NAMPHATHANH>
+
+@foreach (var filmyear in Model)
+{
+    <a href="@Url.Action("filmInYear","Home", new { id= filmyear.ID_NAM} )" class="dropdown-item">
+        @filmyear.NAM_PHAT
+    </a>
+}

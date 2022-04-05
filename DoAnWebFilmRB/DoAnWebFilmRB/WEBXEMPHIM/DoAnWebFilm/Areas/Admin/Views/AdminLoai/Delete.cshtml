@@ -1,0 +1,30 @@
+﻿@model DoAnWebFilm.Models.LOAI
+
+@{ ViewBag.Title = "Delete";
+Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<div>
+    <dl class="dl-horizontal m-4">
+        <h2 class="text-danger">Xóa Loại</h2>
+        <h5>Bạn có chắc chắn muốn xóa không?</h5>
+            <hr/>
+        </br>
+        <dd>
+            <h5>ID LOẠI: </h5>
+            @Html.DisplayFor(model => model.IDLOAI)
+        </dd>
+        <dd>
+            <h5>TÊN LOẠI: </h5>
+            @Html.DisplayFor(model => model.TENLOAI)
+        </dd>
+        </br>
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-warning" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </dl>
+</div>

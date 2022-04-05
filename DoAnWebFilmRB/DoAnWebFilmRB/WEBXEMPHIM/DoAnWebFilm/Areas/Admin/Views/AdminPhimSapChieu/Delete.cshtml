@@ -1,0 +1,39 @@
+﻿@model DoAnWebFilm.Models.PHIMSAPCHIEU
+
+@{ ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<div>
+    <dl class="dl-horizontal m-4">
+        <h2 class="text-danger">Xóa Phim Sắp Chiếu</h2>
+        <h5>Bạn có chắc chắn muốn xóa không?</h5>
+        <hr />
+        </br>
+        <dd>
+            <h5>ID PHIM SẮP CHIẾU: </h5>
+            @Html.DisplayFor(model => model.ID_PHIMSP)
+        </dd>
+        <dd>
+            <h5>TÊN PHIM SẮP CHIẾU: </h5>
+            @Html.DisplayFor(model => model.TEN_PHIMSP)
+        </dd>
+        <dd>
+            <h5>HÌNH PHIM SẮP CHIẾU: </h5>
+            @Html.DisplayFor(model => model.IMAGE_PHIMSP)            
+        </dd>
+        <dd>
+            <h5>LINK PHIM SẮP CHIẾU: </h5>
+            @Html.DisplayFor(model => model.LINK_PHIMSP)
+        </dd>
+        </br>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                 <input type="submit" value="Delete" class="btn btn-warning" /> |
+                   @Html.ActionLink("Back to List", "Index")
+            </div>
+         }
+    </dl>
+</div>
